@@ -15,14 +15,15 @@ $result = mysqli_query($conn, $query);
 
 if (!$result) {
     jsonResponse("error", "Query failed: " . mysqli_error($conn), null, 500);
-    exit;
 }
 
-$slots = [];
+$data = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    $slots[] = $row;
+    // Cast numeric fields to integers for proper JSON parsing
+    $row['id'] = (int) $row['id'];
+    $row['kapasitas'] = (int) $row['kapasitas'];
+    $row['terpakai'] = (int) $row['terpakai'];
+    $data[] = $row;
 }
 
-jsonResponse("success", "Slot servis tersedia", $slots);
-
-mysqli_close($conn);
+jsonResponse("success", "Slot servis tersedia", $data);

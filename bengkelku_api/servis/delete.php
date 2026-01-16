@@ -4,21 +4,22 @@ require "../helpers/response.php";
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse("error", "Method not allowed", null, 405);
-    exit;
 }
 
 if (empty($_POST['id'])) {
     jsonResponse("error", "ID servis tidak valid", null, 400);
-    exit;
 }
 
 $id = intval($_POST['id']);
 
-$stmt = mysqli_prepare($conn, "DELETE FROM servis WHERE id = ?");
+if ($id <= 0) {
+    jsonResponse("error", "ID harus berupa angka positif", null, 400);
+}
+
+$stmt = mysqli_prepare($conn, "DELETE FROM jenis_servis WHERE id = ?");
 
 if (!$stmt) {
     jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);
-    exit;
 }
 
 mysqli_stmt_bind_param($stmt, "i", $id);
@@ -30,8 +31,5 @@ if (mysqli_stmt_execute($stmt)) {
         jsonResponse("error", "Servis tidak ditemukan", null, 404);
     }
 } else {
-    jsonResponse("error", "SQL Error: " . mysqli_stmt_error($stmt), null, 400);
+    jsonResponse("error", "SQL Error: " . mysqli_stmt_error($stmt), null, 500);
 }
-
-mysqli_stmt_close($stmt);
-mysqli_close($conn);
