@@ -2,13 +2,23 @@
 require "../config/database.php";
 require "../helpers/response.php";
 
-$q = mysqli_query($conn,
-    "SELECT * FROM jenis_servis WHERE is_active = 1"
-);
+$query = "SELECT id, nama_servis, harga, deskripsi, aktif 
+          FROM servis 
+          ORDER BY nama_servis ASC";
 
-$data = [];
-while ($r = mysqli_fetch_assoc($q)) {
-    $data[] = $r;
+$result = mysqli_query($conn, $query);
+
+if (!$result) {
+    jsonResponse("error", "Query failed: " . mysqli_error($conn), null, 500);
+    exit;
 }
 
-jsonResponse("success", "Jenis servis", $data);
+$data = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $row['aktif'] = (bool) $row['aktif'];
+    $data[] = $row;
+}
+
+jsonResponse("success", "Semua servis", $data);
+
+mysqli_close($conn);

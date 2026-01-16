@@ -19,10 +19,7 @@ if ($id <= 0) {
     exit;
 }
 
-$stmt = mysqli_prepare(
-    $conn,
-    "DELETE FROM slot_servis WHERE id = ?"
-);
+$stmt = mysqli_prepare($conn, "DELETE FROM slot_servis WHERE id = ?");
 
 if (!$stmt) {
     jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);

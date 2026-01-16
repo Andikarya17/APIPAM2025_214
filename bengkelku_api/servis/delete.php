@@ -2,20 +2,36 @@
 require "../config/database.php";
 require "../helpers/response.php";
 
-$id = $_POST['id'];
-
-if (!$id) {
-    jsonResponse("error", "ID tidak valid", null, 400);
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    jsonResponse("error", "Method not allowed", null, 405);
+    exit;
 }
 
-$stmt = mysqli_prepare(
-    $conn,
-    "DELETE FROM jenis_servis WHERE id = ?"
-);
+if (empty($_POST['id'])) {
+    jsonResponse("error", "ID servis tidak valid", null, 400);
+    exit;
+}
+
+$id = intval($_POST['id']);
+
+$stmt = mysqli_prepare($conn, "DELETE FROM servis WHERE id = ?");
+
+if (!$stmt) {
+    jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);
+    exit;
+}
+
 mysqli_stmt_bind_param($stmt, "i", $id);
 
 if (mysqli_stmt_execute($stmt)) {
-    jsonResponse("success", "Jenis servis berhasil dihapus");
+    if (mysqli_stmt_affected_rows($stmt) > 0) {
+        jsonResponse("success", "Servis berhasil dihapus", null);
+    } else {
+        jsonResponse("error", "Servis tidak ditemukan", null, 404);
+    }
+} else {
+    jsonResponse("error", "SQL Error: " . mysqli_stmt_error($stmt), null, 400);
 }
 
-jsonResponse("error", "Gagal menghapus servis", null, 400);
+mysqli_stmt_close($stmt);
+mysqli_close($conn);
