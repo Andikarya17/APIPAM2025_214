@@ -1,4 +1,7 @@
 <?php
+// Start output buffering to catch any stray output
+ob_start();
+
 require "../config/database.php";
 require "../helpers/response.php";
 

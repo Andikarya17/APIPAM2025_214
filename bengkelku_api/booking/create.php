@@ -1,4 +1,7 @@
 <?php
+// Start output buffering to catch any stray output
+ob_start();
+
 require "../config/database.php";
 require "../helpers/response.php";
 
@@ -56,16 +59,19 @@ mysqli_stmt_close($servisStmt);
 
 $tanggal_servis = $slot['tanggal'];
 $jam_servis = $slot['jam_mulai'];
-$total_biaya = $servis['harga'];
-$status = 'MENUNGGU';  // Store uppercase for Android compatibility
+$total_biaya = (int) $servis['harga'];
+$status = 'MENUNGGU';
 
 // Generate nomor antrian
 $antrianQuery = mysqli_prepare($conn, "SELECT COUNT(*) as total FROM booking WHERE tanggal_servis = ?");
+if (!$antrianQuery) {
+    jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);
+}
 mysqli_stmt_bind_param($antrianQuery, "s", $tanggal_servis);
 mysqli_stmt_execute($antrianQuery);
 $antrianResult = mysqli_stmt_get_result($antrianQuery);
 $antrianData = mysqli_fetch_assoc($antrianResult);
-$nomor_antrian = $antrianData['total'] + 1;
+$nomor_antrian = (int) $antrianData['total'] + 1;
 mysqli_stmt_close($antrianQuery);
 
 // Insert booking
@@ -83,12 +89,15 @@ mysqli_stmt_bind_param($stmt, "iiiissisi", $user_id, $kendaraan_id, $jenis_servi
 
 if (mysqli_stmt_execute($stmt)) {
     $booking_id = mysqli_insert_id($conn);
+    mysqli_stmt_close($stmt);
     
     // Update slot terpakai
     $updateSlot = mysqli_prepare($conn, "UPDATE slot_servis SET terpakai = terpakai + 1 WHERE id = ?");
-    mysqli_stmt_bind_param($updateSlot, "i", $slot_servis_id);
-    mysqli_stmt_execute($updateSlot);
-    mysqli_stmt_close($updateSlot);
+    if ($updateSlot) {
+        mysqli_stmt_bind_param($updateSlot, "i", $slot_servis_id);
+        mysqli_stmt_execute($updateSlot);
+        mysqli_stmt_close($updateSlot);
+    }
     
     // Return booking data with proper types
     $bookingData = [
@@ -100,11 +109,13 @@ if (mysqli_stmt_execute($stmt)) {
         "tanggal_servis" => $tanggal_servis,
         "jam_servis" => $jam_servis,
         "nomor_antrian" => (int) $nomor_antrian,
-        "status" => $status,  // Already uppercase
+        "status" => $status,
         "total_biaya" => (int) $total_biaya
     ];
     
     jsonResponse("success", "Booking berhasil dibuat", $bookingData);
 } else {
-    jsonResponse("error", "SQL Error: " . mysqli_stmt_error($stmt), null, 500);
+    $error = mysqli_stmt_error($stmt);
+    mysqli_stmt_close($stmt);
+    jsonResponse("error", "SQL Error: " . $error, null, 500);
 }
