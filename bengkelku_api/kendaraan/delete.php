@@ -1,4 +1,5 @@
 <?php
+ob_start();
 require "../config/database.php";
 require "../helpers/response.php";
 

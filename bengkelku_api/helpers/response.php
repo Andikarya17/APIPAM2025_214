@@ -1,10 +1,10 @@
 <?php
 /**
- * JSON response helper.
+ * JSON response helper - Simple version
  */
 function jsonResponse($status, $message, $data = null, $code = 200) {
-    // Clean any accidental output only if buffer exists
-    if (ob_get_level() > 0) {
+    // Discard any previous output
+    while (ob_get_level() > 0) {
         ob_end_clean();
     }
     
@@ -15,6 +15,6 @@ function jsonResponse($status, $message, $data = null, $code = 200) {
         "status" => $status,
         "message" => $message,
         "data" => $data
-    ], JSON_UNESCAPED_UNICODE);
+    ]);
     exit;
 }
