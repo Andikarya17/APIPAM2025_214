@@ -1,36 +1,44 @@
 <?php
+/**
+ * KENDARAAN DELETE - Proper implementation with prepared statements
+ */
 ob_start();
-require "../config/database.php";
-require "../helpers/response.php";
 
+require_once "../config/database.php";
+require_once "../helpers/response.php";
+
+// Only POST allowed
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse("error", "Method not allowed", null, 405);
 }
 
-if (empty($_POST['id'])) {
-    jsonResponse("error", "ID kendaraan tidak valid", null, 400);
-}
+// Get input
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
 
-$id = intval($_POST['id']);
-
+// Validate
 if ($id <= 0) {
-    jsonResponse("error", "ID harus berupa angka positif", null, 400);
+    jsonResponse("error", "ID tidak valid", null, 400);
 }
 
+// Delete with prepared statement
 $stmt = mysqli_prepare($conn, "DELETE FROM kendaraan WHERE id = ?");
-
 if (!$stmt) {
-    jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);
+    logError("kendaraan/delete: prepare failed", ["error" => mysqli_error($conn)]);
+    jsonResponse("error", "Database error", null, 500);
 }
 
 mysqli_stmt_bind_param($stmt, "i", $id);
 
-if (mysqli_stmt_execute($stmt)) {
-    if (mysqli_stmt_affected_rows($stmt) > 0) {
-        jsonResponse("success", "Kendaraan berhasil dihapus", null);
-    } else {
-        jsonResponse("error", "Kendaraan tidak ditemukan", null, 404);
-    }
+if (!mysqli_stmt_execute($stmt)) {
+    logError("kendaraan/delete: execute failed", ["error" => mysqli_stmt_error($stmt)]);
+    jsonResponse("error", "Database error", null, 500);
+}
+
+$affected = mysqli_affected_rows($conn);
+mysqli_stmt_close($stmt);
+
+if ($affected > 0) {
+    jsonResponse("success", "Kendaraan berhasil dihapus", null);
 } else {
-    jsonResponse("error", "SQL Error: " . mysqli_stmt_error($stmt), null, 500);
+    jsonResponse("error", "Kendaraan tidak ditemukan", null, 404);
 }

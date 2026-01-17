@@ -1,41 +1,47 @@
 <?php
+/**
+ * SERVIS UPDATE - Proper implementation with prepared statements
+ */
 ob_start();
-require "../config/database.php";
-require "../helpers/response.php";
 
+require_once "../config/database.php";
+require_once "../helpers/response.php";
+
+// Only POST allowed
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse("error", "Method not allowed", null, 405);
 }
 
-if (empty($_POST['id']) || empty($_POST['nama_servis']) || !isset($_POST['harga'])) {
-    jsonResponse("error", "Field tidak lengkap. Wajib: id, nama_servis, harga", null, 400);
-}
-
-$id = intval($_POST['id']);
-$nama_servis = trim($_POST['nama_servis']);
-$harga = intval($_POST['harga']);
+// Get input
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+$nama_servis = isset($_POST['nama_servis']) ? trim($_POST['nama_servis']) : '';
+$harga = isset($_POST['harga']) ? (int)$_POST['harga'] : 0;
 $deskripsi = isset($_POST['deskripsi']) && $_POST['deskripsi'] !== '' ? trim($_POST['deskripsi']) : null;
-$is_active = isset($_POST['is_active']) ? intval($_POST['is_active']) : 1;
 
-$stmt = mysqli_prepare(
-    $conn,
-    "UPDATE jenis_servis 
-     SET nama_servis = ?, harga = ?, deskripsi = ?, is_active = ?
-     WHERE id = ?"
-);
-
-if (!$stmt) {
-    jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);
+// Validate
+if ($id <= 0 || $nama_servis === '' || $harga <= 0) {
+    jsonResponse("error", "id, nama_servis, harga wajib diisi", null, 400);
 }
 
-mysqli_stmt_bind_param($stmt, "sisii", $nama_servis, $harga, $deskripsi, $is_active, $id);
+// Update with prepared statement
+$stmt = mysqli_prepare($conn, "UPDATE jenis_servis SET nama_servis = ?, harga = ?, deskripsi = ? WHERE id = ?");
+if (!$stmt) {
+    logError("servis/update: prepare failed", ["error" => mysqli_error($conn)]);
+    jsonResponse("error", "Database error", null, 500);
+}
 
-if (mysqli_stmt_execute($stmt)) {
-    if (mysqli_stmt_affected_rows($stmt) > 0) {
-        jsonResponse("success", "Servis berhasil diperbarui", null);
-    } else {
-        jsonResponse("error", "Servis tidak ditemukan atau tidak ada perubahan", null, 404);
-    }
+mysqli_stmt_bind_param($stmt, "sisi", $nama_servis, $harga, $deskripsi, $id);
+
+if (!mysqli_stmt_execute($stmt)) {
+    logError("servis/update: execute failed", ["error" => mysqli_stmt_error($stmt)]);
+    jsonResponse("error", "Database error", null, 500);
+}
+
+$affected = mysqli_affected_rows($conn);
+mysqli_stmt_close($stmt);
+
+if ($affected > 0) {
+    jsonResponse("success", "Servis berhasil diperbarui", null);
 } else {
-    jsonResponse("error", "SQL Error: " . mysqli_stmt_error($stmt), null, 500);
+    jsonResponse("error", "Servis tidak ditemukan atau tidak ada perubahan", null, 404);
 }

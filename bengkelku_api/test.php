@@ -1,10 +1,15 @@
 <?php
-// Test endpoint to verify database and PHP are working
+/**
+ * Test endpoint to verify PHP and database connection
+ */
 ob_start();
-require "config/database.php";
-require "helpers/response.php";
 
+require_once "config/database.php";
+require_once "helpers/response.php";
+
+// Test that we got here
 jsonResponse("success", "API is working", [
     "php_version" => phpversion(),
-    "db_connected" => $conn ? true : false
+    "mysqli_get_result_available" => function_exists('mysqli_stmt_get_result'),
+    "db_connected" => isset($conn) && $conn ? true : false
 ]);

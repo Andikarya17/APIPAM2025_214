@@ -1,51 +1,57 @@
 <?php
-// Start output buffering to catch any stray output
+/**
+ * BOOKING UPDATE STATUS - Based on ACTUAL DB schema
+ * 
+ * booking table columns: id, user_id, kendaraan_id, jenis_servis_id, slot_servis_id, nomot_antrian, status, created_at
+ */
 ob_start();
 
-require "../config/database.php";
-require "../helpers/response.php";
+require_once "../config/database.php";
+require_once "../helpers/response.php";
 
+// Only POST allowed
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     jsonResponse("error", "Method not allowed", null, 405);
 }
 
-if (empty($_POST['id']) || empty($_POST['status'])) {
-    jsonResponse("error", "Field tidak lengkap. Wajib: id, status", null, 400);
+// Get and validate input
+$id = isset($_POST['id']) ? (int)$_POST['id'] : 0;
+$status = isset($_POST['status']) ? strtoupper(trim($_POST['status'])) : '';
+
+logError("booking/update_status called", ["id" => $id, "status" => $status]);
+
+if ($id <= 0 || $status === '') {
+    jsonResponse("error", "id dan status wajib diisi", null, 400);
 }
 
-$id = intval($_POST['id']);
-$rawStatus = strtolower(trim($_POST['status']));
-
-// Normalize status - Android sends MENUNGGU/DIPROSES/SELESAI (uppercase)
-// Map all valid variants and store as uppercase for consistency
-$statusMap = [
-    'menunggu' => 'MENUNGGU',
-    'diproses' => 'DIPROSES',
-    'dalam_proses' => 'DIPROSES',  // Legacy fallback
-    'selesai' => 'SELESAI',
-    'dibatalkan' => 'DIBATALKAN'
-];
-
-if (!array_key_exists($rawStatus, $statusMap)) {
-    jsonResponse("error", "Status tidak valid. Pilihan: MENUNGGU, DIPROSES, SELESAI, DIBATALKAN", null, 400);
+// Validate status value
+$allowed = ['MENUNGGU', 'DIPROSES', 'SELESAI', 'DIBATALKAN'];
+if (!in_array($status, $allowed)) {
+    jsonResponse("error", "Status tidak valid. Gunakan: " . implode(", ", $allowed), null, 400);
 }
 
-$status = $statusMap[$rawStatus];
-
-$stmt = mysqli_prepare($conn, "UPDATE booking SET status = ? WHERE id = ?");
-
+// Update status column in booking table
+$query = "UPDATE booking SET status = ? WHERE id = ?";
+$stmt = mysqli_prepare($conn, $query);
 if (!$stmt) {
-    jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);
+    logError("update_status prepare failed", ["error" => mysqli_error($conn)]);
+    jsonResponse("error", "DB Error: " . mysqli_error($conn), null, 500);
 }
 
 mysqli_stmt_bind_param($stmt, "si", $status, $id);
 
-if (mysqli_stmt_execute($stmt)) {
-    if (mysqli_stmt_affected_rows($stmt) > 0) {
-        jsonResponse("success", "Status booking berhasil diperbarui", null);
-    } else {
-        jsonResponse("error", "Booking tidak ditemukan", null, 404);
-    }
+if (!mysqli_stmt_execute($stmt)) {
+    logError("update_status execute failed", ["error" => mysqli_stmt_error($stmt)]);
+    jsonResponse("error", "DB Error: " . mysqli_stmt_error($stmt), null, 500);
+}
+
+$affected = mysqli_affected_rows($conn);
+mysqli_stmt_close($stmt);
+
+logError("update_status result", ["affected" => $affected]);
+
+if ($affected > 0) {
+    jsonResponse("success", "Status berhasil diperbarui", null);
 } else {
-    jsonResponse("error", "SQL Error: " . mysqli_stmt_error($stmt), null, 500);
+    jsonResponse("error", "Booking tidak ditemukan atau status tidak berubah", null, 404);
 }

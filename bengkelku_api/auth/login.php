@@ -1,42 +1,48 @@
 <?php
+/**
+ * AUTH LOGIN - Proper implementation with prepared statements
+ */
 ob_start();
-require "../config/database.php";
-require "../helpers/response.php";
 
-// Ambil data dari POST
-$username = $_POST['username'] ?? '';
-$password = $_POST['password'] ?? '';
+require_once "../config/database.php";
+require_once "../helpers/response.php";
 
-// Validasi minimal
+// Get input
+$username = isset($_POST['username']) ? trim($_POST['username']) : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+
+// Validate
 if ($username === '' || $password === '') {
     jsonResponse("error", "Username dan password wajib diisi", null, 400);
 }
 
-// Ambil user
-$stmt = mysqli_prepare(
-    $conn,
-    "SELECT id, nama, username, password, role FROM users WHERE username = ?"
-);
-
+// Query user
+$stmt = mysqli_prepare($conn, "SELECT id, nama, username, password, role FROM users WHERE username = ?");
 if (!$stmt) {
-    jsonResponse("error", "Prepare failed: " . mysqli_error($conn), null, 500);
+    logError("login: prepare failed", ["error" => mysqli_error($conn)]);
+    jsonResponse("error", "Database error", null, 500);
 }
 
 mysqli_stmt_bind_param($stmt, "s", $username);
-mysqli_stmt_execute($stmt);
+
+if (!mysqli_stmt_execute($stmt)) {
+    logError("login: execute failed", ["error" => mysqli_stmt_error($stmt)]);
+    jsonResponse("error", "Database error", null, 500);
+}
 
 $result = mysqli_stmt_get_result($stmt);
 $user = mysqli_fetch_assoc($result);
+mysqli_stmt_close($stmt);
 
-// Cek password HASH
+// Verify password
 if ($user && password_verify($password, $user['password'])) {
     jsonResponse("success", "Login berhasil", [
-        "id" => (int) $user['id'],
+        "id" => (int)$user['id'],
         "nama" => $user['nama'],
         "username" => $user['username'],
         "role" => $user['role']
     ]);
 }
 
-// Gagal login
+// Failed login
 jsonResponse("error", "Username atau password salah", null, 401);
