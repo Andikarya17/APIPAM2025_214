@@ -1,0 +1,22 @@
+[2026-01-17 07:02:09] booking/list_admin called 
+[2026-01-17 07:02:09] list_admin success {"count":0}
+[2026-01-17 07:02:19] booking/list_customer called {"user_id":4}
+[2026-01-17 07:02:19] list_customer success {"count":0}
+[2026-01-17 07:02:20] booking/list_customer called {"user_id":4}
+[2026-01-17 07:02:20] list_customer success {"count":0}
+[2026-01-17 07:02:21] booking/list_customer called {"user_id":4}
+[2026-01-17 07:02:21] list_customer success {"count":0}
+[2026-01-17 07:02:23] booking/list_customer called {"user_id":4}
+[2026-01-17 07:02:23] list_customer success {"count":0}
+[2026-01-17 07:02:31] booking/create called {"user_id":4,"kendaraan_id":4,"jenis_servis_id":1,"slot_servis_id":1}
+[2026-01-17 07:02:31] FATAL ERROR {"type":1,"message":"Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\\xampp\\htdocs\\bengkelku_api\\booking\\create.php:86\nStack trace:\n#0 C:\\xampp\\htdocs\\bengkelku_api\\booking\\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))\n#1 {main}\n  thrown","file":"C:\\xampp\\htdocs\\bengkelku_api\\booking\\create.php","line":86}
+[2026-01-17 07:06:26] booking/create called {"user_id":4,"kendaraan_id":4,"jenis_servis_id":1,"slot_servis_id":1}
+[2026-01-17 07:06:26] booking created {"booking_id":1,"nomor_antrian":1}
+[2026-01-17 07:06:26] booking/list_customer called {"user_id":4}
+[2026-01-17 07:06:26] list_customer success {"count":1}
+[2026-01-17 07:06:33] booking/list_customer called {"user_id":4}
+[2026-01-17 07:06:33] list_customer success {"count":1}
+[2026-01-17 07:06:57] booking/list_admin called 
+[2026-01-17 07:06:57] list_admin success {"count":1}
+[2026-01-17 07:07:12] booking/list_customer called {"user_id":2}
+[2026-01-17 07:07:12] list_customer success {"count":0}

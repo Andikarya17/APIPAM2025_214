@@ -1,6 +1,9 @@
 <?php
 /**
- * BOOKING UPDATE STATUS - FINAL VERSION
+ * BOOKING UPDATE STATUS - NO antrian column needed
+ * 
+ * Actual booking table columns:
+ * - id, user_id, kendaraan_id, jenis_servis_id, slot_servis_id, status, created_at
  */
 ob_start();
 

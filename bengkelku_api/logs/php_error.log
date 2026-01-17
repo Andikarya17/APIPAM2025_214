@@ -1,0 +1,5 @@
+[17-Jan-2026 07:02:31 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86

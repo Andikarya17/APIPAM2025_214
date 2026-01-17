@@ -1,6 +1,6 @@
 <?php
 /**
- * BOOKING CREATE - FINAL VERSION
+ * BOOKING CREATE - NO antrian column in database
  * 
  * Actual booking table columns:
  * - id, user_id, kendaraan_id, jenis_servis_id, slot_servis_id, status, created_at
@@ -72,7 +72,7 @@ if (!$servis) {
     jsonResponse("error", "Servis tidak ditemukan", null, 404);
 }
 
-// 3. Insert booking - 5 columns only, NO antrian!
+// 3. Insert booking - NO antrian column!
 $status = 'MENUNGGU';
 $insertQuery = "INSERT INTO booking (user_id, kendaraan_id, jenis_servis_id, slot_servis_id, status) VALUES (?, ?, ?, ?, ?)";
 $insertStmt = mysqli_prepare($conn, $insertQuery);
@@ -99,7 +99,7 @@ if ($updateStmt) {
     mysqli_stmt_close($updateStmt);
 }
 
-// 5. Compute nomor_antrian at runtime
+// 5. Compute nomor_antrian at runtime: COUNT bookings for same slot + position
 $antrianStmt = mysqli_prepare($conn, "SELECT COUNT(*) as total FROM booking WHERE slot_servis_id = ? AND id <= ?");
 mysqli_stmt_bind_param($antrianStmt, "ii", $slot_servis_id, $booking_id);
 mysqli_stmt_execute($antrianStmt);
@@ -110,14 +110,14 @@ mysqli_stmt_close($antrianStmt);
 
 logError("booking created", ["booking_id" => $booking_id, "nomor_antrian" => $nomor_antrian]);
 
-// 6. Return success
+// 6. Return success with computed values
 jsonResponse("success", "Booking berhasil dibuat", [
     "id" => (int)$booking_id,
     "user_id" => $user_id,
     "kendaraan_id" => $kendaraan_id,
     "jenis_servis_id" => $jenis_servis_id,
     "slot_servis_id" => $slot_servis_id,
-    "nomor_antrian" => $nomor_antrian,
+    "nomor_antrian" => $nomor_antrian,  // COMPUTED, not from DB
     "status" => $status,
     "tanggal_servis" => $slot['tanggal'],
     "jam_servis" => $slot['jam_mulai'],

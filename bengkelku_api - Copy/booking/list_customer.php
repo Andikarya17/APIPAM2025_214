@@ -1,6 +1,10 @@
 <?php
 /**
- * BOOKING LIST CUSTOMER - FINAL VERSION
+ * BOOKING LIST CUSTOMER - NO antrian column in database
+ * 
+ * Actual booking table columns:
+ * - id, user_id, kendaraan_id, jenis_servis_id, slot_servis_id, status, created_at
+ * 
  * nomor_antrian is COMPUTED using subquery
  */
 ob_start();
@@ -16,6 +20,7 @@ if ($user_id <= 0) {
     jsonResponse("error", "user_id wajib diisi", null, 400);
 }
 
+// Query WITHOUT antrian column - we compute it in PHP
 $query = "
     SELECT 
         b.id,
@@ -62,7 +67,7 @@ if (!$result) {
 
 $data = [];
 while ($row = mysqli_fetch_assoc($result)) {
-    // Compute nomor_antrian
+    // Compute nomor_antrian: position of this booking within its slot
     $antrianQuery = "SELECT COUNT(*) as pos FROM booking WHERE slot_servis_id = ? AND id <= ?";
     $antrianStmt = mysqli_prepare($conn, $antrianQuery);
     mysqli_stmt_bind_param($antrianStmt, "ii", $row['slot_servis_id'], $row['id']);
@@ -78,7 +83,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         "kendaraan_id" => (int)$row['kendaraan_id'],
         "jenis_servis_id" => (int)$row['jenis_servis_id'],
         "slot_servis_id" => (int)$row['slot_servis_id'],
-        "nomor_antrian" => $nomor_antrian,
+        "nomor_antrian" => $nomor_antrian,  // COMPUTED
         "status" => strtoupper($row['status'] ?? 'MENUNGGU'),
         "created_at" => $row['created_at'],
         "tanggal_servis" => $row['tanggal'],

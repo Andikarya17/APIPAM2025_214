@@ -1,0 +1,185 @@
+[17-Jan-2026 05:41:52 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 05:42:10 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 05:42:13 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 05:42:26 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 05:42:37 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 05:42:38 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 05:42:44 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 05:42:45 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 05:42:47 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 05:42:55 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 05:42:57 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 05:42:57 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 05:42:57 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 06:01:21 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 06:01:32 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 06:01:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 06:01:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 06:01:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 06:01:41 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php:54
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_admin.php(54): mysqli_query(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_admin.php on line 54
+[17-Jan-2026 06:01:55 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 06:01:56 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 06:02:23 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 06:02:24 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 06:02:26 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'b.nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php:59
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\list_customer.php(59): mysqli_prepare(Object(mysqli), '\r\n    SELECT \r\n...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\list_customer.php on line 59
+[17-Jan-2026 06:02:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 06:02:35 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 06:02:35 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 06:02:35 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 06:02:35 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 06:02:36 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nomot_antrian' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:102
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(102): mysqli_prepare(Object(mysqli), 'INSERT INTO boo...')
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 102
+[17-Jan-2026 06:24:31 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86
+[17-Jan-2026 06:24:32 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86
+[17-Jan-2026 06:35:14 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86
+[17-Jan-2026 06:41:53 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86
+[17-Jan-2026 06:41:54 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86
+[17-Jan-2026 06:44:34 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86
+[17-Jan-2026 06:44:35 Europe/Berlin] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'kapasitas_terpakai' in 'field list' in C:\xampp\htdocs\bengkelku_api\booking\create.php:86
+Stack trace:
+#0 C:\xampp\htdocs\bengkelku_api\booking\create.php(86): mysqli_stmt_execute(Object(mysqli_stmt))
+#1 {main}
+  thrown in C:\xampp\htdocs\bengkelku_api\booking\create.php on line 86

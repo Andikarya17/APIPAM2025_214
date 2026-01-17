@@ -1,11 +1,10 @@
 <?php
-ob_start();
 require "../config/database.php";
 require "../helpers/response.php";
 
-$query = "SELECT id, nama_servis, harga, deskripsi, is_active 
-          FROM jenis_servis 
-          ORDER BY nama_servis ASC";
+$query = "SELECT id, tanggal, jam_mulai, jam_selesai, kapasitas, terpakai, status 
+          FROM slot_servis 
+          ORDER BY tanggal DESC, jam_mulai DESC";
 
 $result = mysqli_query($conn, $query);
 
@@ -17,9 +16,9 @@ $data = [];
 while ($row = mysqli_fetch_assoc($result)) {
     // Cast numeric fields to integers for proper JSON parsing
     $row['id'] = (int) $row['id'];
-    $row['harga'] = (int) $row['harga'];
-    $row['is_active'] = (bool) $row['is_active'];
+    $row['kapasitas'] = (int) $row['kapasitas'];
+    $row['terpakai'] = (int) $row['terpakai'];
     $data[] = $row;
 }
 
-jsonResponse("success", "Semua servis", $data);
+jsonResponse("success", "Semua slot servis", $data);
